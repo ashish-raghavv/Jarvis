@@ -1,4 +1,4 @@
-# 👏 Wake Up
+# 👏 Jarvis
 
 **Cross-platform** voice and clap-controlled app launcher! Say a wake word, then use clap patterns to launch apps.
 
@@ -331,10 +331,6 @@ Contributions welcome! Feel free to:
 - Improve clap detection algorithm
 - Add more customization options
 - Fix bugs or improve documentation
-
-## 📄 License
-
-MIT License - feel free to use and modify!
 
 ---
 
