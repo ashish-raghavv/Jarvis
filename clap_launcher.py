@@ -72,7 +72,7 @@ class UnifiedLauncher:
         
         try:
             self.porcupine = pvporcupine.create(
-                access_key=PORCUPINE_ACCESS_KEY,
+                access_key="key",
                 keywords=[self.wake_word]
             )
             print(f"✅ Wake word '{self.wake_word}' loaded successfully!")
@@ -272,24 +272,91 @@ class UnifiedLauncher:
         Customize the apps for each platform below!
         """
         print("\n🚀 DOUBLE CLAP DETECTED! Launching apps...\n")
-        
-        if self.os_type == "Darwin":  # macOS
-            # VS Code with specific folder
-            tbt_path = os.path.expanduser("~/code/tbt")
-            self._launch_app_macos("Visual Studio Code", path=tbt_path)
-            print(f"✅ Launched VS Code with folder: {tbt_path}")
-            time.sleep(0.5)
-            
-            # Chrome with specific URL
-            self._launch_app_macos("Google Chrome", args=["--new-window", "https://claude.ai"])
-            print("✅ Launched Chrome with https://claude.ai")
-            time.sleep(0.5)
-            
-            # # Discord
-            # self._launch_app_macos("Discord")
-            # print("✅ Launched Discord")
-            # time.sleep(0.5)
-            
+
+        if self.os_type == "Darwin":
+
+            print("\n🚀 DOUBLE CLAP DETECTED! Launching apps...\n")
+
+            import subprocess
+            import time
+
+            # 1️⃣ Open PyCharm
+            subprocess.Popen(["open", "-a", "PyCharm"])
+            time.sleep(2)
+
+            # 2️⃣ Open Terminal 1
+            subprocess.Popen([
+                "osascript", "-e",
+                'tell application "Terminal" to do script ""'
+            ])
+            time.sleep(1)
+
+            # 3️⃣ Open Terminal 2
+            subprocess.Popen([
+                "osascript", "-e",
+                'tell application "Terminal" to do script ""'
+            ])
+            time.sleep(1)
+
+            # 4️⃣ Move PyCharm to second screen
+            subprocess.Popen([
+                "osascript", "-e",
+                '''
+                tell application "System Events"
+                    tell process "PyCharm"
+                        set position of window 1 to {2000, 50}
+                    end tell
+                end tell
+                '''
+            ])
+
+            # 5️⃣ Move Terminal windows to second screen
+            subprocess.Popen([
+                "osascript", "-e",
+                '''
+                tell application "System Events"
+                    tell process "Terminal"
+                        set position of window 1 to {2000, 50}
+                    end tell
+                end tell
+                '''
+            ])
+
+            print("✅ PyCharm + Terminals moved to secondary screen")
+
+            # 2. YouTube Music
+            subprocess.Popen(["open", "https://music.youtube.com"])
+            print("YouTube Music opened")
+            time.sleep(1)
+
+            # 3. ChatGPT
+            subprocess.Popen(["open", "https://chat.openai.com"])
+            print("ChatGPT opened")
+            time.sleep(1)
+
+            # 4. Claude
+            subprocess.Popen(["open", "https://claude.ai"])
+            print("Claude opened")
+            time.sleep(1)
+
+            # # 5. Terminal 1 (force new window)
+            # subprocess.Popen([
+            #     "osascript", "-e",
+            #     'tell application "Terminal" to do script ""'
+            # ])
+            # print("Terminal 1 opened")
+            # time.sleep(0.8)
+            #
+            # # 6. Terminal 2 (force new window)
+            # subprocess.Popen([
+            #     "osascript", "-e",
+            #     'tell application "Terminal" to do script ""'
+            # ])
+            # print("Terminal 2 opened")
+
+
+
+
         elif self.os_type == "Windows":
             # VS Code
             self._launch_app_windows("code")
